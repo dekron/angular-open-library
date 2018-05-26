@@ -1,0 +1,58 @@
+<div class="book-list">
+    <button class="btn btn-success" (click)="setOffset(-50)">
+        <span aria-hidden="true">&laquo;</span>
+    </button>
+    <button class="btn btn-success pull-right" (click)="setOffset(50)">
+        <span aria-hidden="true">&raquo;</span>
+    </button>
+    <form class="form-horizontal" role="form">
+        <div class="form-group row">
+            <label for="genre-select" class="col-md-1 control-label">{{ 'Genre' | translate }}</label>
+            <div class="col-md-4">
+                <select id="genre-select" class="form-control" [ngModel]="filter.genre"
+                        (ngModelChange)="genreUpdate($event)" name="ganreSelect">
+                    <option value=""></option>
+                    <option value="Science">Science</option>
+                    <option value="Biographies">Biographies</option>
+                    <option value="Textbooks">Textbooks</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Games">Games</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped book-list__table">
+        <thead>
+        <tr>
+            <th>{{ 'Cover' | translate }}</th>
+            <th>{{ 'Name' | translate }}</th>
+            <th>{{ 'Publish Date' | translate }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of books">
+            <th scope="row">
+                <div class="book-image">
+                    <img class="group list-group-image"
+                         [src]="book.isbn_10 && book.isbn_10[0] ? 'http://covers.openlibrary.org/b/isbn/' + book.isbn_10[0] + '-M.jpg': '/assets/images/avatar_book-sm.png'"
+                         alt=""/>
+                </div>
+            </th>
+            <td>{{book.title}}</td>
+            <td>{{book.publish_date}}</td>
+            <td><a class="btn btn-success" [routerLink]="'/card/' + book.key.split('/')[2]">{{ 'Open' | translate }}</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success" (click)="setOffset(-50)">
+        <span aria-hidden="true">&laquo;</span>
+    </button>
+    <button class="btn btn-success pull-right" (click)="setOffset(50)">
+        <span aria-hidden="true">&raquo;</span>
+    </button>
+</div>
+

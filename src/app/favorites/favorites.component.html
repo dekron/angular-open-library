@@ -1,0 +1,32 @@
+<div class="favorites-list">
+  <form class="form-horizontal" role="form">
+    <div class="form-group row">
+      <label for="genre-select" class="col-md-1 control-label">{{ 'Tag' | translate }}</label>
+      <div class="col-md-4">
+        <select id="genre-select" class="form-control" [ngModel]="tagFilter"
+                (ngModelChange)="tagUpdate($event)" name="tagSelect">
+          <option value=""></option>
+          <option [value]="tag" *ngFor="let tag of tagList">{{tag}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <table class="table table-striped book-list__table">
+    <thead>
+    <tr>
+      <th>{{ 'Name' | translate }}</th>
+      <th>{{ 'Tag' | translate }}</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{book.title}}</td>
+      <td>{{book.tag}}</td>
+      <td><a class="btn btn-success" [routerLink]="'/card/' + book.id">{{ 'Open' | translate }}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

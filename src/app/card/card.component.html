@@ -1,0 +1,22 @@
+<div class="card-book">
+    <div class="row">
+        <div class="col-lg-2 image-cover">
+            <img itemprop="image" [src]="'//covers.openlibrary.org/b/olid/' + id + '-M.jpg'" class="cover" alt="">
+        </div>
+        <div class="col-lg-10">
+            <h1 class="work-title" itemprop="name">{{ book.title}}</h1>
+            <h2 class="edition-byline">{{ 'by' | translate }} <span
+                    *ngFor="let author of book.authors">{{author.name}} </span></h2>
+            <h4 class="publisher">
+                {{ 'Published' | translate }}
+                <strong itemprop="datePublished">{{book.publish_date}}</strong>
+            </h4>
+            <form class="form-horizontal" role="form">
+                <div class="form-group tag">
+                    <label for="tag" class="control-label">Тэг</label>
+                    <input class="form-control" id="tag" name="tag" [ngModel]="tag" (change)="tagChanged($event)">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
