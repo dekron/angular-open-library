@@ -42,10 +42,11 @@ export class IndexComponent implements OnInit {
 
   setOffset(num) {
     if (this.offset + num < 1) {
-      this.router.navigate([''], {queryParams: {offset: 1, genre: this.filter.genre}});
+      this.offset = 1;
     } else {
-      this.router.navigate([''], {queryParams: {offset: this.offset + num, genre: this.filter.genre}});
+      this.offset = this.offset + num;
     }
+    this.navigating();
   }
 
   genreUpdate(newValue) {

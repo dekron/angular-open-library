@@ -35,4 +35,12 @@ export class BookService {
   getBook(OLID) {
     return this.http.get(`https://openlibrary.org/api/books?bibkeys=OLID:${OLID}&jscmd=data&format=json`);
   }
+
+  getTags() {
+    return JSON.parse(window.localStorage.getItem('tags')) || [];
+  }
+
+  saveTags(tags) {
+    window.localStorage.setItem('tags', JSON.stringify(tags));
+  }
 }

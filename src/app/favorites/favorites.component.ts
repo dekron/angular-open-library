@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-favorites',
@@ -12,11 +13,11 @@ export class FavoritesComponent implements OnInit {
   public books;
   public tagList;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private _bookService: BookService) {
   }
 
   ngOnInit() {
-    const tags = JSON.parse(window.localStorage.getItem('tags')) || [];
+    const tags = this._bookService.getTags();
     this.books = tags;
     this.tagList = tags
     .map((el) => el.tag)
@@ -34,9 +35,8 @@ export class FavoritesComponent implements OnInit {
   }
 
   getBooks() {
-    const tags = JSON.parse(window.localStorage.getItem('tags')) || [];
+    const tags = this._bookService.getTags();
     this.books = this.tagFilter === '' ? tags : tags
-    .filter((value, index, self) => value.tag === this.tagFilter);
+    .filter((value) => value.tag === this.tagFilter);
   }
-
 }

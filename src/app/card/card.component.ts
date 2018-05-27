@@ -31,13 +31,13 @@ export class CardComponent implements OnInit {
         this.book = data[Object.keys(data)[0]];
       },
       err => console.error(err),
-      () => console.log('done loading books')
+      () => console.log('done loading book')
     );
   }
 
   getTag() {
-    const tags = JSON.parse(window.localStorage.getItem('tags'));
-    if (!tags) { return ''; }
+    const tags = this._bookService.getTags();
+    if (!tags && tags.length < 1) { return ''; }
 
     const tag = tags.find((el) => {
       return el.id === this.id;
@@ -47,7 +47,7 @@ export class CardComponent implements OnInit {
   }
 
   setTag(tag) {
-    const tags = JSON.parse(window.localStorage.getItem('tags')) || [];
+    const tags = this._bookService.getTags();
     const oldIndex = tags.indexOf(tags.find((el) => el.id === this.id));
 
     if (oldIndex >= 0) {
@@ -56,7 +56,7 @@ export class CardComponent implements OnInit {
 
     if (tag === '') {
       this.tag = null;
-      window.localStorage.setItem('tags', JSON.stringify(tags));
+      this._bookService.saveTags(tags);
       return;
     }
 
@@ -68,8 +68,7 @@ export class CardComponent implements OnInit {
     };
 
     tags.push(newTag);
-    window.localStorage.setItem('tags', JSON.stringify(tags));
-
+    this._bookService.saveTags(tags);
   }
 
   tagChanged(e) {
