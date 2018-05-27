@@ -13,7 +13,7 @@
             </h4>
             <form class="form-horizontal" role="form">
                 <div class="form-group tag">
-                    <label for="tag" class="control-label">Тэг</label>
+                    <label for="tag" class="control-label">{{ 'Tag' | translate }}</label>
                     <input class="form-control" id="tag" name="tag" [ngModel]="tag" (change)="tagChanged($event)">
                 </div>
             </form>
